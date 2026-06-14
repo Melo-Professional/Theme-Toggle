@@ -1,7 +1,10 @@
 # Theme-Toggle
 A fast Windows Theme toggle with scheduling option.
-Click the tray icon to instant theme change.
-Set time for auto switch themes.
+
+- Click the tray icon to instant theme change.
+- Set time for auto switch themes.
+
+No running processes, just set the timer and Task Schedule call for theme switching.
 
 
 

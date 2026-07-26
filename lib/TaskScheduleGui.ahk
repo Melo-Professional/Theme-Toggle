@@ -129,15 +129,18 @@ ShowScheduleGUI() {
 
     ; Bind all exit methods to the same save-and-exit function
     btnClose.OnEvent("Click", HandleSaveAndExit)
-    MyGui.OnEvent("Close", HandleSaveAndExit)
-    MyGui.OnEvent("Escape", HandleSaveAndExit)
+;    MyGui.OnEvent("Close", HandleSaveAndExit)
+;    MyGui.OnEvent("Escape", HandleSaveAndExit)
+    
+    MyGui.OnEvent("Close", CleanDestroy)
+    MyGui.OnEvent("Escape", CleanDestroy)
     
     ApplyThemeToGui(MyGui)
     WatchedGUIs.Push(MyGui)
 
     MyGui.Show("w" GuiWidth)
 
-    CleanDestroy() {
+    CleanDestroy(*) {
         RemoveGuiFromArray(MyGui)
         MyGui.Destroy()
     }

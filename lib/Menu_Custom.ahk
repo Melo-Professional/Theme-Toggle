@@ -20,7 +20,7 @@ Menu_Custom() {
     try MoreMenu.Delete("Suspend")
     try MoreMenu.Delete("Pause")
 
-    try MoreMenu.Delete("1&")
+;    try MoreMenu.Delete("1&")
 
     TrayMenu.Insert("More", "Automatic Mode...", (*) => ShowScheduleGUI())
 

@@ -3,18 +3,18 @@
 /************************************************************************
  * @description A fast Windows Theme toggle with scheduling option.
  * @author Melo (melo@meloprofessional.com)
- * @date 2026/06/13
+ * @date 2026/07/25
  * @releasedate 2026/06/02
- * @version 1.0.6.0
+ * @version 1.0.7.2
  ***********************************************************************/
 
 AppName := "Theme Toggle"
 ;@Ahk2Exe-Let U_AppName = %A_PriorLine%
-AppVersion := "1.0.6.0"
+AppVersion := "1.0.7.2"
 ;@Ahk2Exe-Let U_Version = %A_PriorLine%
 AppDescription := "A fast Windows Theme toggle with scheduling option."
-;@Ahk2Exe-AddResource .\lib\sun.ico, 209
-;@Ahk2Exe-AddResource .\lib\moon.ico, 210
+;@Ahk2Exe-AddResource .\images\sun.ico, 209
+;@Ahk2Exe-AddResource .\images\moon.ico, 210
 ;@endregion
 
 ;@region TODO
@@ -26,27 +26,36 @@ frosted windows?
 */
 ;@endregion
 
+backupMode := "AppVersionAndMinutes"
+
 ;@region Directives
 #Requires AutoHotkey v2.0
 #SingleInstance Off
+A_MenuMaskKey := "vkFF"
 Persistent()
 SetWorkingDir(A_ScriptDir)
 A_AllowMainWindow := 0
 A_IconHidden := true
 ; --- Optimization Settings ---
 ;ProcessSetPriority("High")
-;ListLines(False)
-;KeyHistory(0)
+ListLines(False)
+KeyHistory(0)
 ;A_MaxHotkeysPerInterval := 5000
 ;A_HotkeyInterval := 1000
 ;@endregion
 
+;backupMode := "AppVersionAndMinutes"
+
 ;@region Includes
 #Include *i <_CompilerDirectives>
+#Include *i <_Backup>
 #Include *i <_Config&Vars>
 #Include *i <_MsgBoxCustom>
 #Include *i <_SaveSettings>
+#Include *i <_MessageManager>
 #Include *i <_Theme>
+;#Include *i <_FrostedTheme>
+;#Include *i <_TitleBar>
 ;#Include *i <_OSDCustom>
 ;#Include *i <_Color_Picker_Dialog>
 #Include *i <_SplashScreen>
@@ -192,7 +201,7 @@ UpdateIcon(newTheme := "") {
     } else if (A_IsCompiled && mode == "moon"){
         TraySetIcon(A_ScriptFullPath, -210, true)
     } else {
-    TraySetIcon(A_ScriptDir . "\lib\" . mode . ".ico",, true)
+    TraySetIcon(A_ScriptDir . "\images\" . mode . ".ico",, true)
     }
 }
 
@@ -208,3 +217,6 @@ ExitCleanup(*) {
 ;@endregion
 ;ShowScheduleGUI()
 ;^p::Reload()
+
+if IsSet(FirstRun) && FirstRun
+    ShowScheduleGUI()

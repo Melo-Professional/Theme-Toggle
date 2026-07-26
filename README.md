@@ -1,9 +1,12 @@
-# Theme-Toggle
+<h1 align="center">Theme Toggle</h1>
+<p align="center">
+  <a href="https://github.com/Melo-Professional/Theme-Toggle/releases"><img src="https://img.shields.io/github/v/release/Melo-Professional/Theme-Toggle?sort=semver&color=purple" alt="version"></a>
+    <a href="#screenshots"><img src="https://img.shields.io/static/v1?label=made%20with&message=%E2%9D%A4&color=red"></a>
+</p>
 
-![version](https://img.shields.io/github/v/release/Melo-Professional/Theme-Toggle?sort=semver&color=purple)![](https://img.shields.io/static/v1?label=made%20with&message=%E2%9D%A4&color=red)
+<p align="center">A fast Windows Theme toggle with scheduling option</p>
 
-A fast Windows Theme toggle with scheduling option.
-
+---
 - Click the tray icon to instant theme change.
 - Set time for auto switch themes.
 

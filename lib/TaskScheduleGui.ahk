@@ -21,8 +21,25 @@ ShowScheduleGUI() {
         currentDark := "18:00" 
     }
 
-    MyGui := Gui("+LastFound +AlwaysOnTop -MinimizeBox", "Auto Theme Switch")
+    MyGuiTitle := "Auto Theme Switch"
+    MyGuiOptions := "+LastFound +AlwaysOnTop -MinimizeBox"
+    MyGui := Gui(MyGuiOptions, MyGuiTitle)
+;    MyGui := Gui("+LastFound +AlwaysOnTop -MinimizeBox", "Auto Theme Switch")
+    MyGui.SetFont("s" Settings.GuiFontSizeMedium, Settings.GuiFontName)
+    offset := 10
 
+    if IsFunctionDefined("CustomTitleBar") {
+        MyGui.Opt("-Caption")
+        titlebar := %"CustomTitleBar"%.Attach(MyGui, {
+            Title: MyGuiTitle,
+            ShowIcon: true,
+            Min: false,
+            Max: false,
+            Close: true
+        })
+        offset := 60
+        DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", MyGui.Hwnd, "UInt", 33, "Int*", 2, "UInt", 4)
+    }
     ; Define layout constants
     GuiWidth            := 260
     MyGui.MarginX       := 30
@@ -30,7 +47,6 @@ ShowScheduleGUI() {
     buttonswidth        := 100
     
     ; 1. CHECKBOX: Use auto theme switch
-    MyGui.SetFont("s" Settings.GuiFontSizeMedium, Settings.GuiFontName)
     chkAutoSwitch := MyGui.AddCheckbox("xm y+35 w" . (GuiWidth - (MyGui.MarginX * 2)) . " Checked" (fallback ? 0 : 1), "  Use auto theme switch")
 
     ; LIGHT    
@@ -143,5 +159,10 @@ ShowScheduleGUI() {
     CleanDestroy(*) {
         RemoveGuiFromArray(MyGui)
         MyGui.Destroy()
+    }
+
+	IsFunctionDefined(Name) {
+        try return HasMethod(%Name%)
+        return false
     }
 }

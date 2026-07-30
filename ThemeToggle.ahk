@@ -3,18 +3,18 @@
 /************************************************************************
  * @description A fast Windows Theme toggle with scheduling option.
  * @author Melo (melo@meloprofessional.com)
- * @date 2026/07/25
+ * @date 2026/07/30
  * @releasedate 2026/06/02
- * @version 1.0.7.2
+ * @version 1.0.9.0
  ***********************************************************************/
 
 AppName := "Theme Toggle"
 ;@Ahk2Exe-Let U_AppName = %A_PriorLine%
-AppVersion := "1.0.7.2"
+AppVersion := "1.0.9.0"
 ;@Ahk2Exe-Let U_Version = %A_PriorLine%
 AppDescription := "A fast Windows Theme toggle with scheduling option."
-;@Ahk2Exe-AddResource .\images\sun.ico, 209
-;@Ahk2Exe-AddResource .\images\moon.ico, 210
+;@Ahk2Exe-AddResource .\resources\sun.ico, 209
+;@Ahk2Exe-AddResource .\resources\moon.ico, 210
 ;@endregion
 
 ;@region TODO
@@ -26,7 +26,7 @@ frosted windows?
 */
 ;@endregion
 
-backupMode := "AppVersionAndMinutes"
+;_bkpMode := "AppVersionAndMinutes"
 
 ;@region Directives
 #Requires AutoHotkey v2.0
@@ -55,7 +55,7 @@ KeyHistory(0)
 #Include *i <_MessageManager>
 #Include *i <_Theme>
 ;#Include *i <_FrostedTheme>
-;#Include *i <_TitleBar>
+#Include *i <_TitleBar>
 ;#Include *i <_OSDCustom>
 ;#Include *i <_Color_Picker_Dialog>
 #Include *i <_SplashScreen>
@@ -67,6 +67,8 @@ KeyHistory(0)
 #Include <TaskScheduler>
 #Include <TaskScheduleGui>
 ;@endregion
+
+App.Github := "https://github.com/Melo-Professional/Theme-Toggle"
 
 ;@region Startup
 ; TRAY ICON + MENU
@@ -201,7 +203,7 @@ UpdateIcon(newTheme := "") {
     } else if (A_IsCompiled && mode == "moon"){
         TraySetIcon(A_ScriptFullPath, -210, true)
     } else {
-    TraySetIcon(A_ScriptDir . "\images\" . mode . ".ico",, true)
+    TraySetIcon(A_ScriptDir . "\assets\images\" . mode . ".ico",, true)
     }
 }
 

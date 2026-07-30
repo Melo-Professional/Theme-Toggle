@@ -1,8 +1,8 @@
 /************************************************************************
  * @description Theme Library to apply light / dark / auto modes 
  * @author Melo (melo@meloprofessional.com)
- * @date 2026/07/18
- * @version 1.14.0 (Text color fixed)
+ * @date 2026/07/27
+ * @version 1.15.0 (removed background trans from text ddl and checkbox)
  ***********************************************************************/
 
 #Requires AutoHotkey v2.0
@@ -61,12 +61,10 @@ ApplyThemeToGui(guiObj, TextColor := "Auto") {
         colors.TextDefault := Settings.Theme.Dark.TextDefault
         colors.TextStrong := Settings.Theme.Dark.TextStrong
         colors.TextSmooth := Settings.Theme.Dark.TextSmooth
-        colors.BgFixed := Settings.Theme.Dark.Bg
     } else if (TextColor = "Light") {
         colors.TextDefault := Settings.Theme.Light.TextDefault
         colors.TextStrong := Settings.Theme.Light.TextStrong
         colors.TextSmooth := Settings.Theme.Light.TextSmooth
-        colors.BgFixed := Settings.Theme.Dark.Bg
     }
         textBGR := HexToBGR(colors.TextDefault)
 
@@ -129,8 +127,9 @@ ApplyThemeToGui(guiObj, TextColor := "Auto") {
 
             switch ctrlObj.Type {
                 case "Text", "Checkbox", "GroupBox":
-
-                    ctrlObj.Opt("+BackgroundTrans")
+					if !(ctrlObj.Type = "Text") {
+	                    ctrlObj.Opt("+BackgroundTrans")
+					}
                     
                     ; Direct implementation support for dynamic custom object property tags
                     tStyle := ctrlObj.HasOwnProp("ThemeStyle") ? ctrlObj.ThemeStyle : ""
@@ -149,15 +148,6 @@ ApplyThemeToGui(guiObj, TextColor := "Auto") {
                 case "Edit", "ListBox", "ComboBox", "DDL":
                     ctrlBg := colors.HasOwnProp("Ctrl") ? colors.Ctrl : colors.Bg
                     ctrlObj.Opt("+Background" . ctrlBg . " c" . colors.TextDefault)
-
-                case "ComboBox", "DDL":
-                    if TextColor := "Auto" {
-                    ctrlBg := colors.HasOwnProp("Ctrl") ? colors.Ctrl : colors.Bg
-                    ctrlObj.Opt("+Background" . ctrlBg . " c" . colors.TextDefault)
-                    } else {
-                    ctrlBg := colors.HasOwnProp("Ctrl") ? colors.Ctrl : colors.BgFixed
-                    ctrlObj.Opt("+Background" . ctrlBg . " c" . colors.TextDefault)
-                    }
 
                     if (ctrlObj.Type = "ComboBox" || ctrlObj.Type = "DDL") {
                         listHwnd := GetComboListHwnd(ctrlObj)

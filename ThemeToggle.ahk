@@ -3,14 +3,14 @@
 /************************************************************************
  * @description A fast Windows Theme toggle with scheduling option.
  * @author Melo (melo@meloprofessional.com)
- * @date 2026/07/30
+ * @date 2026/08/06
  * @releasedate 2026/06/02
- * @version 1.0.9.0
+ * @version 1.1.0.0
  ***********************************************************************/
 
 AppName := "Theme Toggle"
 ;@Ahk2Exe-Let U_AppName = %A_PriorLine%
-AppVersion := "1.0.9.0"
+AppVersion := "1.1.0.0"
 ;@Ahk2Exe-Let U_Version = %A_PriorLine%
 AppDescription := "A fast Windows Theme toggle with scheduling option."
 ;@Ahk2Exe-AddResource .\resources\sun.ico, 209
@@ -57,23 +57,26 @@ KeyHistory(0)
 ;#Include *i <_FrostedTheme>
 #Include *i <_TitleBar>
 ;#Include *i <_OSDCustom>
+#Include *i <_AutoUpdater>
 ;#Include *i <_Color_Picker_Dialog>
 #Include *i <_SplashScreen>
 #Include *i <_About>
 ;#Include *i <_Help>
 #Include *i <_Menu>
 
+#Include <Vars_Custom>
 #Include <Menu_Custom>
 #Include <TaskScheduler>
 #Include <TaskScheduleGui>
 ;@endregion
 
-App.Github := "https://github.com/Melo-Professional/Theme-Toggle"
-
 ;@region Startup
 ; TRAY ICON + MENU
 StartMenu()
 Menu_Custom()
+if IsSet(StartAutoUpdater) {
+	%"StartAutoUpdater"%()
+}
 ;@endregion
 
 ;@region Instances

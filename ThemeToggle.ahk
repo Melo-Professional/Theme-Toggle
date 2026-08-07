@@ -5,12 +5,12 @@
  * @author Melo (melo@meloprofessional.com)
  * @date 2026/08/06
  * @releasedate 2026/06/02
- * @version 1.1.0.0
+ * @version 1.1.1.0
  ***********************************************************************/
 
 AppName := "Theme Toggle"
 ;@Ahk2Exe-Let U_AppName = %A_PriorLine%
-AppVersion := "1.1.0.0"
+AppVersion := "1.1.1.0"
 ;@Ahk2Exe-Let U_Version = %A_PriorLine%
 AppDescription := "A fast Windows Theme toggle with scheduling option."
 ;@Ahk2Exe-AddResource .\resources\sun.ico, 209
